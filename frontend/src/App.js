@@ -9,7 +9,7 @@ function App() {
     const fd = new FormData();
     fd.append("file", file);
 
-    const res = await axios.post("http://127.0.0.1:5000/analyze", fd);
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/analyze`, fd);
     setData(res.data);
   };
 
