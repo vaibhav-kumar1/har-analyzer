@@ -70,9 +70,9 @@ def detect_correlations(entries):
 # ------------------------------
 # Routes
 # ------------------------------
-@app.route("/")
-def home():
-    return "HAR Analyzer Backend Running 🚀"
+@app.route('/')
+def index():
+    return jsonify({"status": "HAR Analyzer backend is running"})
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
