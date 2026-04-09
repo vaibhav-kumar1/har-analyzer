@@ -2,9 +2,10 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
+import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Allow frontend requests
 
 # ------------------------------
 # LoadRunner generator
@@ -46,14 +47,12 @@ def generate_loadrunner(entries, correlations=[]):
 # JMeter generator placeholder
 # ------------------------------
 def generate_jmeter(entries):
-    # Placeholder content
     return "<jmeter content>"
 
 # ------------------------------
 # k6 generator placeholder
 # ------------------------------
 def generate_k6(entries):
-    # Placeholder content
     return "// k6 content"
 
 # ------------------------------
@@ -102,7 +101,6 @@ def analyze():
     jmeter_script = generate_jmeter(entries)
     k6_script = generate_k6(entries)
 
-    # Return all data
     return jsonify({
         "entries": entries,
         "correlations": correlations,
@@ -116,5 +114,8 @@ def analyze():
 # Run app
 # ------------------------------
 if __name__ == "__main__":
-    print("Starting HAR Analyzer backend on http://127.0.0.1:5000")
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))  # Use Railway-assigned port if available
+    host = "0.0.0.0"  # Listen on all interfaces for Docker/Railway
+    print(f"Starting HAR Analyzer backend on http://{host}:{port}")
+    app.run(host=host, port=port, debug=True)
