@@ -34,5 +34,7 @@ ENV FLASK_ENV=production
 # Expose a port (Railway will override with dynamic $PORT)
 EXPOSE 5000
 
-# Start backend with production-ready settings
-CMD ["python", "backend/app.py"]
+# Use the PORT assigned by Railway
+ENV PORT 5000
+
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "backend.app:app"]

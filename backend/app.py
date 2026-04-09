@@ -109,13 +109,3 @@ def analyze():
         "loadrunner": loadrunner_script,
         "k6": k6_script
     })
-
-# ------------------------------
-# Run app
-# ------------------------------
-if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 5000))  # Use Railway-assigned port if available
-    host = "0.0.0.0"  # Listen on all interfaces for Docker/Railway
-    print(f"Starting HAR Analyzer backend on http://{host}:{port}")
-    app.run(host=host, port=port, debug=True)
